@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIG GAME</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <h3>created by Moses</h3>
+    <div class="header">instruction</div>
+    <div class="instruction-content">
+      <h2 class="intro-header">how to play the game</h2>
+      <ul>
+        <li>The game has 2 players, playing in rounds.</li>
+        <li>
+          In each turn, a player rolls two dice as many times as he whishes.
+          Each result get added to his CURRENT score.
+        </li>
+        <li>
+          BUT, if the player rolls a 1 on any of the dice, all his CURRENT score
+          gets lost. After that, it's the next player's turn.
+        </li>
+        <li>
+          The player can choose to 'Hold', which means that his CURRENT score
+          gets added to his GLOBAL score. After that, it's the next player's
+          turn.
+        </li>
+        <li>
+          A player looses his ENTIRE score when he rolls two 6 in a row on any
+          of the dice. After that, it's the next player's turn.
+        </li>
+        <li>
+          The first player to reach Winner score entered by user on GLOBAL score
+          wins the game.
+        </li>
+      </ul>
+      <button class="instruction-button">close</button>
+    </div>
+
+    <div class="content-box">
+      <div class="top-content">
+        <div class="player1-box">
+          Player 1
+          <span class="dot"></span>
+        </div>
+        <button class="restart-box">New game</button>
+        <div class="player2-box">Player 2</div>
+      </div>
+      <div class="dice-img">
+        <img src="./img/dice1.jpg" alt="#" />
+        <!-- <img src="./img/dice 2.jpg" alt="#" />
+        <img src="./img/dice 3.jpg" alt="#" />
+        <img src="./img/dice 4.jpg" alt="#" />
+        <img src="./img/dice 5.jpg" alt="#" />
+        <img src="./img/dice 6.jpg" alt="#" />
+        <img src="./img/dice 7.jpg" alt="#" /> -->
+      </div>
+      <div class="middle-content">
+        <div class="player1-score">
+          <span class="score">score</span>
+          <span class="digit">0</span>
+        </div>
+        <button class="roll-box">Roll</button>
+
+        <div class="player2-score">
+          <span class="score">score</span>
+          <span class="digit">0</span>
+        </div>
+      </div>
+      <div class="buttom-content">
+        <div class="player1-currentscore">
+          <span class="score-2">Current score</span>
+          <span class="digit-2">0</span>
+        </div>
+        <div class="hold-box">
+          <button class="hold-btn">Hold</button>
+          <input
+            type="number"
+            id="number"
+            min="1"
+            max="1000"
+            step="1"
+            placeholder="set score"
+          />
+        </div>
+
+        <div class="player2-currentscore">
+          <span class="score-3">Current score</span>
+          <span class="digit-3">0</span>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
