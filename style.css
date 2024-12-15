@@ -52,7 +52,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.463);
-  display: none;
+  visibility: hidden;
 }
 .intro-header {
   margin-bottom: 20px;
@@ -249,4 +249,7 @@ input[type="number"] {
 }
 .visible {
   visibility: visible;
+}
+.result {
+  background-color: rgba(0, 0, 0, 0.463);
 }
