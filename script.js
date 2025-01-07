@@ -21,7 +21,7 @@ diceImg.style.visibility = "hidden";
 // digitOne1.textContent = "0";
 // digitTwo.textContent = "0";
 // // current-scores
-// digitZero.textContent = "0";
+digitZero.textContent = 0;
 // digitOne.textContent = "0";
 
 window.addEventListener("load", function () {
@@ -71,6 +71,11 @@ rollBtn.addEventListener("click", function () {
     console.log(currentScore, "current score");
     digitZero.textContent = currentScore;
   } else {
+    //switch player
+    switchPlayer();
+
+    // change current score to zero
+    scores += currentScore;
   }
 });
 
@@ -90,6 +95,8 @@ const switchPlayer = function () {
 //hold button
 holdBtn.addEventListener("click", function () {
   switchPlayer();
+  // add current score to the total score
+  digitZero = digitZero + digitOne1;
 });
 
 function resetScore() {
