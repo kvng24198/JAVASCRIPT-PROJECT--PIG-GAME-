@@ -12,16 +12,17 @@ const activePlayer2 = document.querySelector(".active-2");
 const rollBtn = document.querySelector(".roll-box");
 const diceImg = document.querySelector(".dice-img");
 const diceNumber = document.querySelector(".dice-number");
-const digitZero = document.querySelector(".digit-0");
-const digitOne = document.querySelector(".digit-1");
-const digitOne1 = document.querySelector(".digit-one1");
-const digitTwo = document.querySelector(".digit-two");
+const digit_0 = document.querySelector(".digit-0");
+const digit_1 = document.querySelector(".digit-1");
+const score_0 = document.querySelector(".score-0");
+const score_1 = document.querySelector(".score-1");
+const set_score = document.querySelector(".set-score");
 diceImg.style.visibility = "hidden";
 // // scores
 // digitOne1.textContent = "0";
 // digitTwo.textContent = "0";
 // // current-scores
-digitZero.textContent = 0;
+digit_0.textContent = 0;
 // digitOne.textContent = "0";
 
 window.addEventListener("load", function () {
@@ -69,13 +70,13 @@ rollBtn.addEventListener("click", function () {
     //add the dice value to current score
     currentScore += dice;
     console.log(currentScore, "current score");
-    digitZero.textContent = currentScore;
+    document.querySelector(`.digit-${activePlayer}`).textContent = currentScore;
   } else {
     //switch player
     switchPlayer();
 
     // change current score to zero
-    scores += currentScore;
+    currentScore = 0;
   }
 });
 
@@ -94,15 +95,38 @@ const switchPlayer = function () {
 
 //hold button
 holdBtn.addEventListener("click", function () {
-  switchPlayer();
   // add current score to the total score
-  digitZero = digitZero + digitOne1;
+  scores[activePlayer] += currentScore;
+
+  //display the scores
+  document.querySelector(`.score-${activePlayer}`).textContent =
+    scores[activePlayer];
+
+  //reset current score
+  currentScore = 0;
+
+  // check for winner
+  if (scores[activePlayer] >= 10) {
+    document.querySelector(`.player-${activePlayer}-box`).textContent =
+      "WINNER";
+  } else {
+    //switch active player
+    switchPlayer();
+  }
 });
 
 function resetScore() {
   for (let x = 0; x < digit.length; x++) {
     digit[x].textContent = 0;
   }
+  // switch the activeplayer to player-1
+  activePlayer = 0;
+
+  // add the active dot to player-1
+  activePlayer1.classList.add("dot");
+  activePlayer2.classList.remove("dot");
+  // make the dice invisible when new game is clicked
+  diceImg.style.visibility = "hidden";
 }
 
 startBtn.addEventListener("click", resetScore);

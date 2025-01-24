@@ -87,7 +87,7 @@ li {
   gap: 40px;
   /* margin-bottom: 70px; */
 }
-.player1-box {
+.player-0-box {
   width: 160px;
   height: 40px;
   background-color: #fbd5d5;
@@ -111,7 +111,7 @@ li {
 .restart-box:active {
   box-shadow: inset -4px -4px 5px rgba(0, 0, 0, 0.068);
 }
-.player2-box {
+.player-1-box {
   width: 160px;
   height: 40px;
   background-color: #fbd5d5;
