@@ -58,25 +58,28 @@ overLay.addEventListener("click", function () {
 
 //dice roll
 rollBtn.addEventListener("click", function () {
-  //generate random number
-  const dice = Math.trunc(Math.random() * 6) + 1;
-  console.log(dice);
-  //display the dice
-  diceImg.style.visibility = "visible";
-  diceNumber.src = `./img/dice-${dice}.jpg`;
+  if (playing === true) {
+    //generate random number
+    const dice = Math.trunc(Math.random() * 6) + 1;
+    console.log(dice);
+    //display the dice
+    diceImg.style.visibility = "visible";
+    diceNumber.src = `./img/dice-${dice}.jpg`;
 
-  //check if dice value is 1
-  if (dice !== 1) {
-    //add the dice value to current score
-    currentScore += dice;
-    console.log(currentScore, "current score");
-    document.querySelector(`.digit-${activePlayer}`).textContent = currentScore;
-  } else {
-    //switch player
-    switchPlayer();
+    //check if dice value is 1
+    if (dice !== 1) {
+      //add the dice value to current score
+      currentScore += dice;
+      console.log(currentScore, "current score");
+      document.querySelector(`.digit-${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      //switch player
+      switchPlayer();
 
-    // change current score to zero
-    currentScore = 0;
+      // change current score to zero
+      currentScore = 0;
+    }
   }
 });
 
@@ -95,23 +98,30 @@ const switchPlayer = function () {
 
 //hold button
 holdBtn.addEventListener("click", function () {
-  // add current score to the total score
-  scores[activePlayer] += currentScore;
+  if (playing === true) {
+    // add current score to the total score
+    scores[activePlayer] += currentScore;
 
-  //display the scores
-  document.querySelector(`.score-${activePlayer}`).textContent =
-    scores[activePlayer];
+    //display the scores
+    document.querySelector(`.score-${activePlayer}`).textContent =
+      scores[activePlayer];
 
-  //reset current score
-  currentScore = 0;
+    //reset current score
+    currentScore = 0;
 
-  // check for winner
-  if (scores[activePlayer] >= 10) {
-    document.querySelector(`.player-${activePlayer}-box`).textContent =
-      "WINNER";
-  } else {
-    //switch active player
-    switchPlayer();
+    // check for winner
+    if (scores[activePlayer] >= set_score.value) {
+      document.querySelector(`.player-${activePlayer}-box`).textContent =
+        "WINNER";
+      document
+        .querySelector(`.player-${activePlayer}-box`)
+        .classList.add("winner-animation");
+
+      playing = false;
+    } else {
+      //switch active player
+      switchPlayer();
+    }
   }
 });
 
