@@ -21,6 +21,9 @@ const p_one = document.querySelector(".p-1");
 const p_two = document.querySelector(".p-2");
 const dice_numOne = document.querySelector(".dice-number-1");
 const dice_numTwo = document.querySelector(".dice-number-2");
+const cont_1 = document.querySelector(".cont-1").innerHTML;
+const cont_2 = document.querySelector(".cont-2").innerHTML;
+
 diceImg.style.visibility = "hidden";
 // // scores
 // digitOne1.textContent = "0";
@@ -64,17 +67,30 @@ overLay.addEventListener("click", function () {
 rollBtn.addEventListener("click", function () {
   if (playing === true) {
     // generate random number
-    const dice = Math.trunc(Math.random() * 6) + 1;
+    const dice = Math.trunc(Math.random() * 2) + 5;
     console.log(dice);
-    const dice1 = Math.trunc(Math.random() * 6) + 1;
+    const dice1 = Math.trunc(Math.random() * 2) + 5;
     console.log(dice1);
     //display the dice
     diceImg.style.visibility = "visible";
     dice_numTwo.src = `./img/dice-${dice}.jpg`;
     dice_numOne.src = `./img/dice-${dice1}.jpg`;
 
+    // check if both dice are 6
+    if (dice1 == 6 && dice == 6) {
+      //clear the score
+      scores[activePlayer] = 0;
+      document.querySelector(`.score-${activePlayer}`).textContent = 0;
+
+      //clear the current score
+      document.querySelector(`.digit-${activePlayer}`).textContent = 0;
+      currentScore = 0;
+
+      //switch active player
+      switchPlayer();
+    }
     //check if dice value is 1
-    if (dice !== 1 && dice1 !== 1) {
+    else if (dice !== 1 && dice1 !== 1) {
       //add the dice value to current score
       currentScore += dice1 + dice;
       console.log(currentScore, "current score");
@@ -91,7 +107,7 @@ rollBtn.addEventListener("click", function () {
 });
 
 // switching players
-const switchPlayer = function () {
+function switchPlayer() {
   //change the textcontent of the currentScore to 0
   document.querySelector(`.digit-${activePlayer}`).textContent = 0;
 
@@ -99,9 +115,9 @@ const switchPlayer = function () {
   activePlayer = activePlayer === 0 ? 1 : 0;
 
   //switch the active player dot
-  activePlayer1.classList.toggle("dot");
-  activePlayer2.classList.toggle("dot");
-};
+  document.querySelector(".active-1").classList.toggle("dot");
+  document.querySelector(".active-2").classList.toggle("dot");
+}
 
 //hold button
 holdBtn.addEventListener("click", function () {
@@ -118,6 +134,8 @@ holdBtn.addEventListener("click", function () {
 
     // check for winner
     if (scores[activePlayer] >= set_score.value) {
+      //change the textcontent of the currentScore to 0
+      document.querySelector(`.digit-${activePlayer}`).textContent = 0;
       document.querySelector(`.player-${activePlayer}-box`).textContent =
         "WINNER";
       document
@@ -126,6 +144,9 @@ holdBtn.addEventListener("click", function () {
 
       playing = false;
     } else {
+      //reset current score
+      currentScore = 0;
+
       //switch active player
       switchPlayer();
     }
@@ -150,13 +171,13 @@ function resetScore() {
   /*  document.querySelector(`.p-1`).textContent = "player 1";
   document.querySelector(`.p-2`).textContent = "player 2"; */
   console.log(p_one.textContent);
-  document.querySelector(`.player-0-box`).innerHTML = p_one.textContent;
-  document.querySelector(`.player-1-box`).innerHTML = p_two.textContent;
+  document.querySelector(`.player-0-box`).innerHTML = cont_1;
+  document.querySelector(`.player-1-box`).innerHTML = cont_2;
 
-  document.querySelector(`.player-0-box`).innerHTML = activePlayer1.text;
+  //document.querySelector(`.player-0-box`).innerHTML = activePlayer1.text;
   // add the active dot to player-1
-  activePlayer1.classList.add("dot");
-  activePlayer2.classList.remove("dot");
+  document.querySelector(".active-1").classList.add("dot");
+  document.querySelector(".active-2").classList.remove("dot");
 
   //set playing to true
   playing = true;
